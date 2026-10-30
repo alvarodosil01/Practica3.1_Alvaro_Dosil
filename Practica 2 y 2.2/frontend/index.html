@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#183d35">
+  <title>Álvaro · Tienda online</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23183d35'/%3E%3Ctext x='18' y='45' font-size='40' fill='%23f8f5ed'%3Ea%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#productos" aria-label="Álvaro, inicio"><span class="brand-icon">a.</span><span>álvaro<span class="brand-sub">TIENDA ONLINE</span></span></a>
+    <span class="practice">Arquitectura de Software <span>/</span> Práctica 2.2</span>
+    <span id="connection-status" class="connection" role="status">Sin conectar</span>
+  </header>
+  <main>
+    <section class="intro">
+      <div><p class="eyebrow">TU TIENDA, EN UN SOLO LUGAR</p><h1>Todo empieza aquí.</h1><p class="intro-copy">Organiza tu catálogo, conoce a tus clientes y gestiona sus pedidos.</p></div>
+      <div class="intro-mark" aria-hidden="true">↗</div>
+    </section>
+    <section class="server-bar" aria-label="Conexión con la tienda">
+      <form id="server-form"><label for="server-url">Servidor de la tienda</label><div class="server-controls"><input id="server-url" type="url" required placeholder="http://127.0.0.1:8000" spellcheck="false"><button type="submit" id="connect-button">Conectar <span aria-hidden="true">↗</span></button></div></form>
+      <p>Conecta con la API que se ejecuta en este ordenador.</p>
+    </section>
+    <div class="workspace-heading"><nav class="tabs" aria-label="Secciones de la tienda"><button type="button" data-tab="productos" aria-current="page">Productos <span id="product-count">0</span></button><button type="button" data-tab="usuarios">Usuarios <span id="user-count">0</span></button><button type="button" data-tab="pedidos">Pedidos</button></nav><button id="refresh-button" class="text-button" type="button">↻ Actualizar</button></div>
+
+    <section id="panel-productos" class="panel" aria-label="Productos">
+      <div class="section-title"><div><p class="eyebrow">EL CATÁLOGO</p><h2>Productos de la tienda</h2></div><p id="catalog-caption">Conecta para ver tu catálogo.</p></div>
+      <div class="layout"><div><div id="product-list" class="product-grid"><div class="empty">Conecta con el servidor para consultar los productos.</div></div></div>
+      <aside class="card form-card"><div class="card-heading"><span class="step">+</span><h3>Nuevo producto</h3></div><form id="product-form" class="stack">
+        <label>Nombre<input name="nombre" required maxlength="120" placeholder="Ej. Auriculares inalámbricos"></label>
+        <label>Categoría<select name="tipo" id="product-type"><option value="generico">Genérico</option><option value="electronico">Electrónico</option><option value="ropa">Ropa</option></select></label>
+        <div class="form-row"><label>Precio (€)<input name="precio" type="number" min="0" step="0.01" required placeholder="0,00"></label><label>Unidades<input name="stock" type="number" min="0" step="1" required placeholder="0"></label></div>
+        <fieldset id="electronic-fields" hidden disabled><label>Garantía (meses)<input name="meses_garantia" type="number" min="0" step="1" required placeholder="24"></label></fieldset>
+        <fieldset id="clothing-fields" hidden disabled><div class="form-row"><label>Talla<input name="talla" required placeholder="M"></label><label>Color<input name="color" required placeholder="Azul"></label></div></fieldset>
+        <button type="submit" class="primary" data-needs-server>Añadir al catálogo <span aria-hidden="true">+</span></button>
+      </form></aside></div>
+    </section>
+
+    <section id="panel-usuarios" class="panel" aria-label="Usuarios" hidden>
+      <div class="section-title"><div><p class="eyebrow">LAS PERSONAS</p><h2>Usuarios de la tienda</h2></div><p>Clientes y administradores, juntos.</p></div>
+      <div class="layout"><div id="user-list" class="user-list"></div><aside class="card form-card"><div class="card-heading"><span class="step">+</span><h3>Nuevo usuario</h3></div><form id="user-form" class="stack">
+        <label>Nombre<input name="nombre" required placeholder="Nombre completo"></label>
+        <label>Correo electrónico<input name="email" type="email" required placeholder="nombre@ejemplo.com"></label>
+        <label>Tipo de usuario<select name="tipo" id="user-type"><option value="cliente">Cliente</option><option value="administrador">Administrador</option></select></label>
+        <label>Dirección postal<input name="direccion" id="user-address" required placeholder="Calle, número y ciudad"></label>
+        <button type="submit" class="primary" data-needs-server>Crear usuario <span aria-hidden="true">+</span></button>
+      </form></aside></div>
+    </section>
+
+    <section id="panel-pedidos" class="panel" aria-label="Pedidos" hidden>
+      <div class="section-title"><div><p class="eyebrow">CADA COMPRA CUENTA</p><h2>Pedidos e historial</h2></div><p>El stock se actualiza al confirmar.</p></div>
+      <div class="order-layout"><section class="card form-card"><div class="card-heading"><span class="step">↗</span><h3>Crear un pedido</h3></div><form id="order-form" class="stack">
+        <label>Cliente<select id="order-client" name="cliente_id" required><option value="">Selecciona un cliente</option></select></label>
+        <div class="line-heading"><span>Productos del pedido</span><button type="button" id="add-line" class="text-button">+ Añadir línea</button></div>
+        <div id="order-lines" class="stack"></div>
+        <div class="order-total"><span>Total estimado</span><strong id="order-total">0,00 €</strong></div>
+        <p class="small muted">La disponibilidad y el importe final se comprueban al confirmar.</p>
+        <button type="submit" class="primary" data-needs-server>Confirmar pedido <span aria-hidden="true">→</span></button>
+      </form></section>
+      <section class="history-area"><div class="card-heading"><h3>Historial de pedidos</h3></div><form id="history-form" class="history-controls"><label class="sr-only" for="history-client">Cliente del historial</label><select id="history-client" required><option value="">Selecciona un cliente</option></select><button type="submit" class="secondary" data-needs-server>Consultar</button></form><div id="history-list" class="stack"><div class="empty">Selecciona un cliente para consultar sus pedidos.</div></div></section></div>
+    </section>
+    <footer><span>álvaro <span class="footer-dot">·</span> Práctica 2.2</span><span>Un servicio. Distintas formas de conectar.</span><a id="docs-link" href="http://127.0.0.1:8000/docs" target="_blank" rel="noopener">Abrir documentación ↗</a></footer>
+  </main>
+  <div id="notification" class="notification" role="status" aria-live="polite" hidden></div>
+  <noscript>Activa JavaScript para conectar la tienda con la API.</noscript>
+</body>
+</html>

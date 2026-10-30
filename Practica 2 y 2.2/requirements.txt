@@ -1,0 +1,2 @@
+-r fast-api-uie-main/requirements.txt
+-r cliente/requirements.txt
