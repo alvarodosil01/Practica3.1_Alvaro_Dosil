@@ -49,7 +49,7 @@ def delete_item(item_id: int, db: Session = Depends(get_db)):
 
 
 # Endpoints añadidos para la tienda online de la Práctica 1.
-"""Punto de entrada y endpoints, siguiendo el ejemplo fast-api-uie-main."""
+"""Punto de entrada y endpoints de la API de la tienda."""
 
 from fastapi import FastAPI, Request, Response, status
 from fastapi.responses import JSONResponse
@@ -112,7 +112,7 @@ def listar_pedidos(cliente_id: str):
     return crud.listar_pedidos(cliente_id)
 
 
-# P2_2: permite al frontend, servido por separado, consumir la misma API.
+# Permite al frontend, servido por separado, consumir la misma API.
 # El frontend y la API se ejecutan en este mismo ordenador, en puertos distintos.
 from fastapi.middleware.cors import CORSMiddleware
 

@@ -16,13 +16,13 @@ Aplicación para gestionar una tienda online. Permite registrar usuarios, gestio
 ```text
 Practica 3/
 ├── compose.yaml             # Arranque conjunto de backend y frontend
-├── dockerfile               # Imagen del backend
-├── .dockerignore
 ├── requirements.txt
 ├── Complemento.md
 ├── backend/                 # API y lógica de la tienda
 │   ├── app/
-│   └── requirements.txt
+│   ├── requirements.txt
+│   ├── dockerfile
+│   └── .dockerignore
 ├── frontend/               # Interfaz web y su imagen Docker
 │   ├── index.html
 │   ├── styles.css
@@ -95,7 +95,7 @@ docker pull alvarodosil/tienda-frontend:1.0
 Si quieres construir las imágenes desde el código fuente, ejecuta estos comandos desde `Practica 3`. Este paso es opcional para probar la entrega:
 
 ```powershell
-docker build -t tienda-backend:local -f dockerfile .
+docker build -t tienda-backend:local -f backend/dockerfile ./backend
 docker build -t tienda-frontend:local -f frontend/dockerfile ./frontend
 ```
 
