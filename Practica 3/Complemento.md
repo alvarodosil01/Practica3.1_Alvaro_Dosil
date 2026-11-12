@@ -1,6 +1,6 @@
-# Complemento de la práctica 2.2
+# Complemento de la práctica 3
 
-EsEste documento explica las ampliaciones realizadas sobre fast-api-uie-main. Las instrucciones generales del ejemplo se encuentran en el README de esa carpeta.
+Este documento explica las ampliaciones realizadas en `backend/`. Las instrucciones generales del proyecto se encuentran en el README de la raíz del repositorio.
 
 1. Integración de la práctica 1
 
