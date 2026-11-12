@@ -1,4 +1,4 @@
-/* Cliente web de P2_2. Las llamadas HTTP están centralizadas en api().
+/* Cliente web de la práctica 3. Las llamadas HTTP están centralizadas en api().
    No importa clases, servicios ni código Python del servidor. */
 'use strict';
 const $ = (selector) => document.querySelector(selector);
