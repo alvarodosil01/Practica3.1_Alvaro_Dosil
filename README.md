@@ -14,13 +14,13 @@ Aplicación para gestionar una tienda online. Permite registrar usuarios, gestio
 ## Estructura
 
 ```text
-Practica 2 y 2.2/
+Practica 3/
 ├── compose.yaml             # Arranque conjunto de backend y frontend
 ├── dockerfile               # Imagen del backend
 ├── .dockerignore
 ├── requirements.txt
 ├── Complemento.md
-├── fast-api-uie-main/       # API y lógica de la tienda
+├── backend/                 # API y lógica de la tienda
 │   ├── app/
 │   └── requirements.txt
 ├── frontend/               # Interfaz web y su imagen Docker
@@ -41,7 +41,7 @@ Necesitas Docker Desktop instalado y en ejecución, con contenedores Linux. Para
 Desde la raíz del repositorio:
 
 ```powershell
-cd "Practica 2 y 2.2"
+cd "Practica 3"
 docker compose up -d
 ```
 
@@ -92,7 +92,7 @@ docker pull alvarodosil/tienda-backend:1.0
 docker pull alvarodosil/tienda-frontend:1.0
 ```
 
-Si quieres construir las imágenes desde el código fuente, ejecuta estos comandos desde `Practica 2 y 2.2`. Este paso es opcional para probar la entrega:
+Si quieres construir las imágenes desde el código fuente, ejecuta estos comandos desde `Practica 3`. Este paso es opcional para probar la entrega:
 
 ```powershell
 docker build -t tienda-backend:local -f dockerfile .
@@ -119,7 +119,7 @@ Compose utiliza las imágenes publicadas; no construye el código local.
 
 El cliente `cliente/cliente.py` **no se ejecuta automáticamente con Compose**. Es un script independiente que consume la API mediante HTTP y comprueba el funcionamiento de la tienda. El frontend puede utilizarse sin ejecutar este cliente.
 
-Con los servicios en marcha, abre otra terminal en `Practica 2 y 2.2`. Necesitas Python y pip instalados en tu equipo:
+Con los servicios en marcha, abre otra terminal en `Practica 3`. Necesitas Python y pip instalados en tu equipo:
 
 ```powershell
 python -m pip install -r cliente/requirements.txt
