@@ -1,7 +1,9 @@
 __pycache__/
-*.py[cod]
-.git/
+*.pyc
+.git
 .gitignore
-.venv/
+.venv
 venv/
 .pytest_cache/
+.DS_Store
+tests/
